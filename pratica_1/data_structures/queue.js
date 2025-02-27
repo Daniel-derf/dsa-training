@@ -1,4 +1,4 @@
-const assert = require("node:assert/strict");
+import assert from "node:assert";
 
 class Queue {
   elements = [];
