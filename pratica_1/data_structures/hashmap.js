@@ -49,6 +49,7 @@ class HashMap {
 
     let nextValue = this.array[idx][2];
     while (true) {
+      if (!nextValue) return;
       if (nextValue[0] === key) break;
       nextValue = nextValue[2];
     }
@@ -68,6 +69,7 @@ class HashMap {
 
     let nextValue = this.array[idx][2];
     while (true) {
+      if (!nextValue) return;
       if (nextValue[0] === key) break;
       nextValue = nextValue[2];
     }
@@ -90,3 +92,8 @@ assert.deepStrictEqual(hashmap.get("key1"), 20);
 
 hashmap.delete("key1");
 assert.deepStrictEqual(hashmap.get("key1"), undefined);
+
+hashmap.set("key1", 60);
+hashmap.delete("key2");
+assert.deepStrictEqual(hashmap.get("key2"), undefined);
+assert.deepStrictEqual(hashmap.get("key1"), 60);
