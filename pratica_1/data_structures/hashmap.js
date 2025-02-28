@@ -68,13 +68,19 @@ class HashMap {
     }
 
     let nextValue = this.array[idx][2];
+    let prevValue = this.array[idx];
+
+    let i = 0;
     while (true) {
       if (!nextValue) return;
-      if (nextValue[0] === key) break;
+      if (nextValue[0] === key) {
+        prevValue[2] = nextValue[2];
+        break;
+      }
+      i += 1;
+      prevValue = nextValue;
       nextValue = nextValue[2];
     }
-
-    nextValue = nextValue[2] ? nextValue[2] : undefined;
   }
 }
 
@@ -97,3 +103,13 @@ hashmap.set("key1", 60);
 hashmap.delete("key2");
 assert.deepStrictEqual(hashmap.get("key2"), undefined);
 assert.deepStrictEqual(hashmap.get("key1"), 60);
+
+hashmap.set("aaa", 10);
+hashmap.set("bbb", 20);
+hashmap.set("ccc", 30);
+
+hashmap.delete("bbb");
+
+assert.deepStrictEqual(hashmap.get("aaa"), 10);
+assert.deepStrictEqual(hashmap.get("bbb"), undefined);
+assert.deepStrictEqual(hashmap.get("ccc"), 30);
