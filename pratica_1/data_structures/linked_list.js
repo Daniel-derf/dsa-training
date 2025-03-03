@@ -1,13 +1,48 @@
 import assert from "node:assert";
 import test from "node:test";
 
-class Node {}
+class Node {
+  value = null;
+  next = null;
+
+  constructor(value) {
+    this.value = value;
+  }
+}
 
 class LinkedList {
-  add() {}
-  print() {}
+  head = null;
+  tail = null;
+
+  add(value) {
+    const newNode = new Node(value);
+
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+      return;
+    }
+
+    this.tail.next = newNode;
+    this.tail = newNode;
+  }
+
+  print() {
+    const listArray = [];
+
+    let node = this.head;
+    while (node) {
+      listArray.push(node.value);
+      node = node?.next;
+    }
+
+    return listArray;
+  }
+
   find() {}
+
   remove() {}
+
   invert() {}
 }
 
@@ -54,5 +89,3 @@ test("inverting list", () => {
   linkedList.invert();
   assert.deepStrictEqual(linkedList.print(), [1, 3]);
 });
-
-console.log("Todos os testes passaram!");
